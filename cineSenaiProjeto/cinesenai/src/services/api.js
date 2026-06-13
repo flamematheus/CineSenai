@@ -71,4 +71,68 @@ export const api = {
                 body:JSON.stringify({nome ,email,senha}),
             }),
     },
+
+    filmes:{
+        Listar:() => request("/api/filmes"),
+
+        buscarPorid:(id)=> request(`/api/filmes/${id}`),
+
+        criar:(filme)=> request("/api/filmes",{
+            method:"POST",
+            body:JSON.stringify(filme)
+
+        }),
+
+        atualizar:(filme,id)=> request(`/api/filmes/${id}`,{
+            method:"PUT",
+            body:JSON.stringify(filme),
+
+        }),
+
+        deletar:(id)=> request(`/api/filmes/${id}`,{
+            method:"DELETE",
+        }),
+
+    },
+    
+    avaliacoes:{
+        Listar:(filmeId)=> request(`/api/filmes/${filmeId}/avaliacoes`),
+
+        criar : (filmeId,avaliacao)=>request(`/api/filmes/${filmeId}/avaliacoes`,{
+
+            method :"POST",
+            body:JSON.stringify(avaliacao),
+        }),
+            
+    },
+
+    admin :{
+        ListarReservas :() => request(`/api/admin/reservas`),
+
+        gerarRelatorio: ()=>request(`/api/admin/relatorios`),
+
+        promoverUsuario:(id)=> request(`/api/admin/usuarios${id}/promover`,{
+            method :"PACHT"
+        }),
+    },
+
+    favoritos: {
+        listar: (filmeId)=> request(`/api/filmes/${filmeId}/favoritos`),// TODO
+
+
+        adicionar:(filme)=> request(`/api/filmes/${filme}/favoritos`,{
+            method:"POST",
+            body:JSON.stringify(filme)
+            }), // TODO
+
+        
+        remover: (id)=> request(`/api/filmes/${id}/favoritos`,{
+            method:"DELETE",
+        }),  // TODO
+
+        verificar: (filmeId)=> request(`api/favoritos/verificar?filmeId=${filmeId}`,{
+         
+            }),// verifica se um filme específico já está nos favoritos
+    },
+
 }
